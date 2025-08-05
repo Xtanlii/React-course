@@ -11,17 +11,73 @@
 
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
-      const button = <button>hello</button>;
-      const paragraph = <p>paragraph of text </p>
-      const div = (
+     function ChatInput() {
+      return (
+        <>
+          <input 
+            placeholder="Send a message to Chatbot" 
+            size="30"
+          />
+          <button>Send</button>
+        </>
+      ) 
+     }
+
+     function ChatMessage({message, sender}) {
+      
+      // const {message, sender} = props;
+      /*
+      if(sender === 'robot') {
+        return (
+          <div>
+            <img width="50" src="robot.png"/>
+            {message}
+        </div>
+        )
+
+      }
+      */
+      return (
         <div>
-          <button>hello</button>
-          <p>paragraph of text </p>              
+          {sender === 'robot' && (
+            <img width="50" src="robot.png"/>
+          )}
+          {message}
+          {sender === 'user' && (
+            <img width="50" src="user.png"/>
+          )}
         </div>
       )
+     }
+
+     function App() {
+      return (
+        <> 
+          <ChatInput />          
+          <ChatMessage 
+            message="Hello chatbot " 
+            sender="user" 
+          /> 
+          <ChatMessage
+            message="Hello! How can I help you?" 
+            sender="robot" 
+           />
+          <ChatMessage 
+            message="can you get me today's date" 
+            sender="user" 
+          />
+          <ChatMessage 
+            message="Today is August 5" 
+            sender="robot" 
+          />
+        </>
+      
+      )
+     }
+      
       const container = document.querySelector('.js-container');
-      ReactDOM.createRoot(container).render(div);
+      ReactDOM.createRoot(container).render(<App />);
     </script>
-    <script src="react-basics.js"></script>
+    
   </body>
 </html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>State and Event Handlers</title>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+       
+      
+    function Click(props) {
+      const { count, setCount } = props;
+      
+      function increaseCount() {
+        const newCount = (count + 1);
+        setCount(newCount);
+      } 
+      
+      return( 
+        ((count === 1) ?
+        <button onClick={increaseCount}>Clicked {count} time</button> :
+        <button onClick={increaseCount}>Clicked {count} times</button>) 
+      )
+      
+    }
+    function Button() {
+      const [count, setCount] = React.useState(0);
+      return (
+        <>
+        <Click count={count} setCount={setCount} />
+        <Click count={count} setCount={setCount} />
+        <button onClick={() => {setCount(0)}}>Reset Count</button>
+        </>
+      )
+    }
+      
+ 
+      const container = document.querySelector('.js-container');
+      ReactDOM.createRoot(container).render(<Button />);
+    </script>
+  </body>
+</html>

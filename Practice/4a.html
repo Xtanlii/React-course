@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>React Basics</title>
+  <style>
+    .on-button, .off-button {
+      background-color: rgb(21, 135, 84);
+      padding: 10px 15px;
+      border-radius: 5px;
+      border: none;
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
+    }
+    .off-button {
+      background-color: rgb(220, 53, 69);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="js-container"></div>
+
+  <script src="https://unpkg.com/supersimpledev/react.js"></script>
+  <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+  <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+  <script type="text/babel">
+    function On() {
+      const [isButtonOn, setIsButtonOn] = React.useState(true);
+      function flicker() {
+        (isButtonOn === false) 
+          ? setIsButtonOn(true)
+          : setIsButtonOn(false)
+      }
+
+      return (
+        <button
+        onClick={flicker}
+        className={isButtonOn === true ? "off-button" : "on-button"}
+        >
+        {isButtonOn === true
+          ? 'OFF' 
+          : 'ON'
+        }
+        </button>
+
+      )
+    }
+
+    const container = document.querySelector('.js-container');
+    ReactDOM.createRoot(container).render(<On />);
+  </script>
+  <script src="react-basics.js"></script>
+</body>
+
+</html>

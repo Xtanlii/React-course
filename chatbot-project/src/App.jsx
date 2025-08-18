@@ -1,15 +1,7 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState } from 'react'
 import ChatInput from './components/ChatInput';
 import Chatmessages from './components/ChatMessages';
 import './App.css'
-
-
-
-
-
-
-
-
 
 function App() {
   const [chatMessages, setChatMessages] = useState([{

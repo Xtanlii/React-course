@@ -1,26 +1,46 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react';
+import dayjs from 'dayjs';
+import { chatbot } from 'supersimpledev';
 import ChatInput from './components/ChatInput';
 import Chatmessages from './components/ChatMessages';
 import './App.css'
+
+
 
 function App() {
   const [chatMessages, setChatMessages] = useState([{
     message: 'Hello chatbot',
     sender: 'user',
-    id: 'id1'
+    id: 'id1',
+    time: `${dayjs().format('h:mma')}`
   }, {
     message: 'Hello! How can I help you?',
     sender: 'robot',
-    id: 'id2'
+    id: 'id2',
+    time: `${dayjs().format('h:mma')}`
   }, {
     message: 'can you get me todays date',
     sender: 'user',
-    id: 'id3'
+    id: 'id3',
+    time: `${dayjs().format('h:mma')}`
   }, {
     message: 'Today is August 5',
     sender: 'robot',
-    id: 'id4'
+    id: 'id4',
+    time: `${dayjs().format('h:mma')}`
   }]);
+  
+  
+  useEffect(() => {
+    chatbot.addResponses({
+      'is javaScript good': 'Javascript Is  Good',
+      'who are you': 'I am your assistant chatbot',
+      'give me a unique id': () => {
+        return `Sure! Here's a unique ID: ${crypto.randomUUID()}`
+      }
+
+    })
+  }, []);
   // const [chatMessages, setChatMessages] = array;
   // const chatMessages = array[0];
   // const setChatMessages = array[1];

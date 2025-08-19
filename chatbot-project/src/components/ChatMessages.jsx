@@ -10,6 +10,7 @@ function Chatmessages({ chatMessages }) {
       containerElem.scrollTop = containerElem.scrollHeight
     }
   }, [chatMessages]);
+  
   return (
     <div className="chat-messages-container"
       ref={chatMessagesRef}
@@ -19,6 +20,7 @@ function Chatmessages({ chatMessages }) {
           <ChatMessage
             message={chatMessage.message}
             sender={chatMessage.sender}
+            time={chatMessage.time}
             key={chatMessage.id}
           />
         )

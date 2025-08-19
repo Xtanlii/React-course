@@ -3,6 +3,13 @@
   justify-content: end;
   align-items: start;
 }
+.chat-time {
+  color:rgb(124, 123, 123);
+  padding: 2px 0px;
+  margin-bottom: -10px;
+  font-size: 15px;
+  
+}
 .chat-message-text {
   background-color: rgb(238, 238, 238);
   padding: 15px 20px;

@@ -58,7 +58,8 @@ export default function ChatInput({ chatMessages, setChatMessages }) {
   }
 
   function clearMessage() {
-    
+    setChatMessages([]);
+  //  localStorage.setItem('messages', JSON.stringify([])) 
   }
 
   return (

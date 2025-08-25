@@ -7,15 +7,11 @@ function OrdersGrid({orders}) {
       {orders.map((order) => {
         return (
           <div key={order.id} className="order-container">
-
             <OrderHeader order={order} />
-
             <OrderDetailsGrid order={order} />
           </div>
-
         )
       })}
-
     </div>
   );
 }

@@ -12,11 +12,13 @@ function OrdersPage({ cart }) {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    axios.get('/api/orders?expand=products')
-      .then((response) => {
-        setOrders(response.data)
-      })
+    const fetchProductsData = async () => {
+      const response = await axios.get('/api/orders?expand=products')
+      setOrders(response.data)
+    }
+    fetchProductsData();
   }, [])
+  
   return (
     <>
       <link rel="icon" type="image/svg+xml" href="orders-favicon.png" />
@@ -84,14 +86,14 @@ function OrdersPage({ cart }) {
                     )
                   })}
 
-                  
 
-                 
 
-                  
+
+
+
                 </div>
-              </div> 
-              
+              </div>
+
             )
           })}
 

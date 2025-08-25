@@ -1,10 +1,34 @@
-import { Link } from 'react-router';
+import { Link, useParams } from 'react-router';
 import Header from '../../components/Header';
 import './TrackingPage.css';
+import { Fragment, useEffect, useState } from 'react';
+import axios from 'axios';
+import dayjs from 'dayjs';
 
-function TrackingPage({cart}) {
+
+function TrackingPage({ cart }) {
+  const { orderId, productId } = useParams();
+  const [order, setOrder] = useState(null);
+
+  useEffect(() => {
+    const fetchTrackingData = async () => {
+      const response = await axios.get(`/api/orders/${orderId}?expand=products`);
+      setOrder(response.data);
+      
+    }
+    fetchTrackingData();
+  }, [orderId])
+  
+  if (!order) { 
+    return null; 
+  }
+
+  const selectedProduct = order.products.find((orderProduct) => {
+      return orderProduct.productId === productId
+    })
+
   return (
-    <>
+    <Fragment key={productId}>
       <title>Tracking</title>
       <link rel="icon" type="image/svg+xml" href="tracking-favicon.png" />
       <Header cart={cart} />
@@ -16,18 +40,18 @@ function TrackingPage({cart}) {
           </Link>
 
           <div className="delivery-date">
-            Arriving on Monday, June 13
+            Arriving on {dayjs(selectedProduct.estimatedDeliveryTimeMs).format('MMMM D')}
           </div>
 
           <div className="product-info">
-            Black and Gray Athletic Cotton Socks - 6 Pairs
+            {selectedProduct.product.name}
           </div>
 
           <div className="product-info">
-            Quantity: 1
+            Quantity: {selectedProduct.quantity}
           </div>
 
-          <img className="product-image" src="images/products/athletic-cotton-socks-6-pairs.jpg" />
+          <img className="product-image" src={selectedProduct.product.image} />
 
           <div className="progress-labels-container">
             <div className="progress-label">
@@ -44,10 +68,15 @@ function TrackingPage({cart}) {
           <div className="progress-bar-container">
             <div className="progress-bar"></div>
           </div>
+
+
+
+
         </div>
       </div>
-    </>
+    </Fragment>
   );
 }
+
 
 export default TrackingPage;

@@ -9,15 +9,15 @@ import TrackingPage from './pages/tracking/TrackingPage'
 import ErrorPage from './pages/ErrorPage'
 
 function App() {
-  
   const [cart, setCart] = useState([])
   useEffect(() => {
-    axios.get('/api/cart-items?expand=product')
-      .then((response) => {
-        setCart(response.data);
-      })
-
+    const getCartData = async() => {
+      const response = await axios.get('/api/cart-items?expand=product')
+      setCart(response.data);  
+    }
+    getCartData();
   }, []);
+
   return (
   <Routes>
     <Route index element={<HomePage cart={cart} />} />

@@ -51,7 +51,6 @@ describe('Product component', () => {
   })
 
 
-
   it('adds a product to the cart', async () => {
     render(<Product product={product} loadCart={loadCart} />)
 

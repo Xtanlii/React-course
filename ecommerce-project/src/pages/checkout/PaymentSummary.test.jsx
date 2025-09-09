@@ -68,6 +68,8 @@ describe('tests for paymentSummary', () => {
   it('test the place order button', async () => {
     const placeOrderBtn = await screen.getByTestId('place-order')
     await user.click(placeOrderBtn);
+
+    expect(axios.post).toHaveBeenCalledWith('/api/orders')
     expect(screen.getByTestId('url-path')).toHaveTextContent('/orders')
     
   })

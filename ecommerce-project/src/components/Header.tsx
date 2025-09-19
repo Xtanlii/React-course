@@ -7,20 +7,28 @@ import SearchIcon from '../assets/images/icons/search-icon.png'
 import { useState } from 'react';
 
 
-function Header({cart}) {
+type HeaderProps = {
+  cart: {
+    productId: string;
+    quantity: number;
+    deliveryOptionId: string;
+  }[];
+}
+
+function Header({ cart }: HeaderProps) {
   const [searchParams] = useSearchParams();
-  const search = searchParams.get('search') 
+  const search = searchParams.get('search')
   const [text, setText] = useState(search || '');
-  
+
   const navigate = useNavigate()
 
-  const updateText = (e) => {
-    setText(e.target.value)
+  const updateText = (event) => {
+    setText(event.target.value)
   }
   const searchText = () => {
-    navigate(`/?search=${text}`)  
+    navigate(`/?search=${text}`)
   }
-  
+
   let totalQuantity = 0;
   cart.forEach((cartItem) => {
     totalQuantity += cartItem.quantity;
@@ -38,16 +46,16 @@ function Header({cart}) {
         </div>
 
         <div className="middle-section">
-          <input 
-          className="search-bar" 
-          type="text" 
-          value={text}
-          onChange={updateText}
-          placeholder="Search"
-           />
+          <input
+            className="search-bar"
+            type="text"
+            value={text}
+            onChange={updateText}
+            placeholder="Search"
+          />
 
           <button className="search-button"
-           onClick={searchText}>
+            onClick={searchText}>
             <img className="search-icon" src={SearchIcon} />
           </button>
         </div>

@@ -4,7 +4,9 @@ import MobileLogoWhite from '../assets/images/mobile-logo-white.png'
 import LogoWhite from '../assets/images/logo-white.png'
 import CartIcon from '../assets/images/icons/cart-icon.png'
 import SearchIcon from '../assets/images/icons/search-icon.png'
+
 import { useState } from 'react';
+import type { ChangeEvent } from 'react';
 
 
 type HeaderProps = {
@@ -22,8 +24,8 @@ function Header({ cart }: HeaderProps) {
 
   const navigate = useNavigate()
 
-  const updateText = (event) => {
-    setText(event.target.value)
+  const updateText = (e: ChangeEvent<HTMLInputElement>) => {
+    setText(e.target.value)
   }
   const searchText = () => {
     navigate(`/?search=${text}`)

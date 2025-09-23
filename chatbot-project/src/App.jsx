@@ -3,6 +3,7 @@ import dayjs from 'dayjs';
 import { chatbot } from 'supersimpledev';
 import ChatInput from './components/ChatInput';
 import Chatmessages from './components/ChatMessages';
+import Robot from './assets/robot.png'
 import './App.css'
 
 
@@ -45,12 +46,16 @@ function App() {
   useEffect(() => {
     localStorage.setItem('messages', JSON.stringify(chatMessages))
   }, [chatMessages])
+
+  const num = chatMessages.length;
+  const title = `${num} messages`
   // const [chatMessages, setChatMessages] = array;
   // const chatMessages = array[0];
   // const setChatMessages = array[1];
   return (
     <div className="app-container">
-      
+      <title>{title}</title>
+      <link rel="icon" type="image/svg+xml" href={Robot} />
       <Chatmessages
         chatMessages={chatMessages}
       />

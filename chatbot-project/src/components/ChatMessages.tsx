@@ -2,15 +2,26 @@ import { useRef, useEffect } from 'react'
 import ChatMessage from './ChatMessage';
 import './ChatMessages.css'
 
-function Chatmessages({ chatMessages }) {
-  const chatMessagesRef = useRef(null);
+type ChatMessagesProps = {
+  chatMessages: {
+    id: string,
+    message: string,
+    sender: string,
+    time: string
+  }[];
+}
+
+
+function Chatmessages({ chatMessages }: ChatMessagesProps) {
+  const chatMessagesRef = useRef<HTMLDivElement>(null);
+  
   useEffect(() => {
     const containerElem = chatMessagesRef.current
-    if(containerElem) {
+    if (containerElem) {
       containerElem.scrollTop = containerElem.scrollHeight
     }
   }, [chatMessages]);
-  
+
   return (
     <div className="chat-messages-container"
       ref={chatMessagesRef}

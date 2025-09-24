@@ -2,11 +2,31 @@ import { useState } from 'react';
 import {Chatbot} from 'supersimpledev';
 import './ChatInput.css';
 import dayjs from 'dayjs';
+import type { ChangeEvent, KeyboardEvent } from 'react';
 
-export default function ChatInput({ chatMessages, setChatMessages }) {
+
+
+type ChatInputProps = {
+  chatMessages: {
+    id: string,
+    message: string,
+    sender: string,
+    time: string
+  }[];
+  setChatMessages: (chatMessages: {
+    id: string,
+    message: string,
+    sender: string,
+    time: string
+  }[]) => void
+}
+
+
+
+export default function ChatInput({ chatMessages, setChatMessages }:ChatInputProps,) {
   const [inputText, setInputText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  function saveInputText(event) {
+  function saveInputText(event: ChangeEvent<HTMLInputElement>) {
     setInputText(event.target.value)
   }
   
@@ -52,9 +72,13 @@ export default function ChatInput({ chatMessages, setChatMessages }) {
     setInputText('');
     setIsLoading(false);
   }
-  function keyDown(event) {
-    (event.key === 'Enter') ? sendMessage() : null;
-    (event.key === 'Escape') ? setInputText('') : null;     
+  function keyDown(event: KeyboardEvent<HTMLInputElement>) {
+    if(event.key === "Enter") {
+      sendMessage();
+    }
+     if(event.key === "Escape") {
+      setInputText('');
+    }   
   }
 
   function clearMessage() {
@@ -66,7 +90,7 @@ export default function ChatInput({ chatMessages, setChatMessages }) {
     <div className="chat-input-container">
       <input
         placeholder="Send a message to Chatbot"
-        size="30"
+        size={30}
         onChange={saveInputText}
         value={inputText}
         onKeyDown={keyDown}
